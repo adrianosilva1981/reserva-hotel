@@ -1,0 +1,38 @@
+#navtop {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	background-color: #343a40;
+	color: #fff;
+	position: sticky;
+}
+
+#sidebar {
+	position: fixed;
+	width: 100%;
+}
+
+#sidebar .content {
+	position: absolute;
+	width: 240px;
+	top: 0;
+	right: 0;
+	padding: 10px 5px;
+	background-color: #343a40;
+	color: #fff;
+	display: none;
+}
+
+.no-spaces {
+	padding: 0;
+	margin: 0
+}
+
+.text-small {
+	font-size: 14px
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}

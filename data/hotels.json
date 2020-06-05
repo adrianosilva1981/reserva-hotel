@@ -1,0 +1,53 @@
+[
+	{
+		"id": 0,
+		"name": "Parque das Flores",
+		"description": "Av. São João Del Rei, 255 - São João Del Rei/MG",
+		"img": "assets/img/hotel1.jpg",
+		"rating": 3,
+		"prices": {
+			"days_week": {
+				"regular": 110,
+				"vip": 80
+			},
+			"weekend": {
+				"regular": 90,
+				"vip": 80
+			}
+		}
+	},
+	{
+		"id": 1,
+		"name": "Jardim Botânico",
+		"description": "R. Imigrantes do Novo Mundo, 988 - Brotas/PR",
+		"img": "assets/img/hotel2.jpg",
+		"rating": 4,
+		"prices": {
+			"days_week": {
+				"regular": 160,
+				"vip": 110
+			},
+			"weekend": {
+				"regular": 60,
+				"vip": 50
+			}
+		}
+	},
+	{
+		"id": 2,
+		"name": "Mar Atlântico",
+		"description": "Av. Cruz dos Bandeirantes, 14 - São Paulo/SP",
+		"img": "assets/img/hotel3.jpg",
+		"rating": 5,
+		"prices": {
+			"days_week": {
+				"regular": 220,
+				"vip": 100
+			},
+			"weekend": {
+				"regular": 150,
+				"vip": 40
+			}
+		}
+	}
+]

@@ -1,0 +1,172 @@
+<div class="container" ng-init="onInit()">
+	<h3>Reservas</h3>
+
+	<div class="row mt-3">
+		<div class="col-md-4" ng-repeat="(key, value) in hotels">
+			<div class="card" style="cursor: pointer; height: 100%">
+				<img src="{{value.img}}" class="card-img-top" alt="{{value.name}}">
+				<div class="card-body">
+					<h5 class="card-title">{{value.name}}</h5>
+					<p class="card-text">{{value.description}}</p>
+					<a href="#" ng-click="setHotel(value.id, value.name)" class="btn btn-primary" data-toggle="modal" data-target="#reservationModal">RESERVAR</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="mt-4" ng-show="success && !loading">
+		<div class="alert alert-success mt-4">
+		  <p class="text-center">Reserva realizada com sucesso!</p>
+		</div>
+
+		<div class="mt-4">
+			<table class="table">
+				<thead>
+					<tr>
+					  <th scope="col">Nome</th>
+					  <th scope="col">Data</th>
+					  <th scope="col">Preço total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+			  			<td>{{confirm.name}}</td>
+			  			<td>
+			  				Entrada: {{confirm.checkin}}<br>
+			  				Saída: {{confirm.checkout}}
+			  			</td>
+			  			<td>{{confirm.total}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+<div class="modal fade" id="reservationModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Faça sua reserva</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>Reservar em: {{modalTitle}}</p>
+				<form>
+					<input type="hidden" ng-model="reservationForm.hotel.value">
+					<div class="form-group">
+						<label>Nome</label>
+						<input type="text"
+							   class="form-control form-control-sm"
+							   ng-model="reservationForm.name.value"
+							   ng-class="{ 'is-invalid' : !reservationForm.name.valid }"
+							   ng-focus="reservationForm.name.valid = true">
+					</div>
+					<div class="form-group">
+						<label>Telefone</label>
+						<input type="tel"
+							   id="telefone"
+							   maxlength="15"
+							   class="form-control form-control-sm"
+							   ng-model="reservationForm.phone.value"
+							   ng-class="{ 'is-invalid' : !reservationForm.phone.valid }"
+							   ng-focus="reservationForm.phone.valid = true">
+					</div>
+					<div class="form-group">
+						<label>Cliente vip?</label>
+						<select class="form-control form-control-sm" name="vip" ng-model="reservationForm.vip.value">
+							<option value="no">Não</option>
+							<option value="yes">Sim</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm">
+								<label>Checkin</label>
+								<div class="input-group input-group-sm date">
+									<input type="text"
+										   class="form-control datepicker"
+										   ng-model="reservationForm.checkin.value"
+										   ng-class="{ 'is-invalid' : !reservationForm.checkin.valid }"
+										   ng-focus="reservationForm.checkin.valid = true">
+									<div class="input-group-append">
+										<span class="input-group-text">
+											<i class="far fa-calendar-alt"></i>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm">
+								<label>Checkout</label>
+								<div class="input-group input-group-sm date">
+									<input type="text"
+										   class="form-control datepicker"
+										   ng-model="reservationForm.checkout.value"
+										   ng-class="{ 'is-invalid' : !reservationForm.checkout.valid }"
+										   ng-focus="reservationForm.checkout.valid = true">
+									<div class="input-group-append">
+										<span class="input-group-text">
+											<i class="far fa-calendar-alt"></i>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<p class="text-center" ng-show="loading"><i class="fas fa-circle-notch fa-spin"></i></p>
+				<div class="alert alert-warning" ng-show="response && !loading"><small>{{message}}</small></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button"
+						class="btn btn-danger btn-sm"
+						ng-class="{'disabled': loading}"
+						ng-class="expression"
+						data-dismiss="modal">Cancelar</button>
+				<button type="button"
+						class="btn btn-primary btn-sm"
+						ng-class="{'disabled': loading}"
+						ng-click="confirmReservation()">Confirmar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+$('.datepicker').datepicker({
+    format: 'dd/mm/yyyy',
+    language: 'pt-BR'
+});
+
+$('.datepicker').mask('00/00/0000');
+
+function mascara(o,f){
+    v_obj=o
+    v_fun=f
+    setTimeout("execmascara()",1)
+}
+
+function execmascara(){
+    v_obj.value=v_fun(v_obj.value)
+}
+
+function mtel(v){
+    v=v.replace(/\D/g,"");
+    v=v.replace(/^(\d{2})(\d)/g,"($1) $2");
+    v=v.replace(/(\d)(\d{4})$/,"$1-$2");
+    return v;
+}
+
+function id(el){
+    return document.getElementById( el );
+}
+
+$(document).ready(function(e) {
+    id('telefone').onkeyup = function(){
+        mascara(this, mtel);
+    }
+});
+</script>
