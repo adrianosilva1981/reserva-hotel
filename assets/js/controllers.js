@@ -7,7 +7,7 @@ app.controller('homeController', function($scope){
 });
 
 // === reservation controller =============================================================================
-app.controller('reservaController', function($scope, $http, $timeout){
+app.controller('reservaController', function($scope, $http, $timeout, $location, $anchorScroll){
 
 	$scope.hotels = [];
 	$scope.reservations = [];
@@ -82,7 +82,6 @@ app.controller('reservaController', function($scope, $http, $timeout){
 	}
 
 	$scope.confirmReservation = () => {
-		console.log('entra');
 		for (key in $scope.reservationForm) {
 			if($scope.reservationForm[key].required && $scope.reservationForm[key].value === '') {
 				$scope.reservationForm[key].valid = false;
@@ -90,7 +89,6 @@ app.controller('reservaController', function($scope, $http, $timeout){
 				return;
 			}
 		}
-		console.log('sai');
 		let data = {};
 		for (key in $scope.reservationForm) {
 			if(key === 'checkin' || key === 'checkout') {
@@ -114,11 +112,10 @@ app.controller('reservaController', function($scope, $http, $timeout){
 				for (key in $scope.reservationForm) {
 					if($scope.reservationForm[key].required) {
 						if(key === 'vip') $scope.reservationForm[key].value = 'no';
-						else $scope.reservationForm[key].value;
+						else $scope.reservationForm[key].value = '';
 						$scope.reservationForm[key].valid = true;
 					}
 				}
-				$('#reservationModal').modal('hide');
 
 				$scope.confirm.name = response.data.name;
 				$scope.confirm.total = response.data.total;

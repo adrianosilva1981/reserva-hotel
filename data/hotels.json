@@ -1,6 +1,6 @@
 [
 	{
-		"id": 0,
+		"id": 1,
 		"name": "Parque das Flores",
 		"description": "Av. São João Del Rei, 255 - São João Del Rei/MG",
 		"img": "assets/img/hotel1.jpg",
@@ -17,7 +17,7 @@
 		}
 	},
 	{
-		"id": 1,
+		"id": 2,
 		"name": "Jardim Botânico",
 		"description": "R. Imigrantes do Novo Mundo, 988 - Brotas/PR",
 		"img": "assets/img/hotel2.jpg",
@@ -34,7 +34,7 @@
 		}
 	},
 	{
-		"id": 2,
+		"id": 3,
 		"name": "Mar Atlântico",
 		"description": "Av. Cruz dos Bandeirantes, 14 - São Paulo/SP",
 		"img": "assets/img/hotel3.jpg",

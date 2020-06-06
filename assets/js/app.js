@@ -1,4 +1,5 @@
 var app = angular.module('bivatoAPP', ['ngRoute']);
+var openSidebar = false;
 
 app.config(function ($routeProvider, $locationProvider) {
 	$routeProvider
@@ -17,5 +18,22 @@ app.config(function ($routeProvider, $locationProvider) {
 		redirectTo: '/'
 	});
 
+
 	$locationProvider.html5Mode(true);
 });
+
+app.run(function($rootScope, $location) {
+	$rootScope.$on("$locationChangeStart", function(event, next, current) {
+		if(openSidebar) {
+			$("#sidebar .content").hide();
+			openSidebar = false;
+		}
+    });
+});
+
+$('#open-side-bar').click(() => {
+	openSidebar = !openSidebar;
+	if(openSidebar) $("#sidebar .content").show();
+	else $("#sidebar .content").hide();
+});
+
