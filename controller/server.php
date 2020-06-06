@@ -11,9 +11,6 @@ switch ($action) {
 		break;
 
 	case 'save-reservation':
-
-	$week = array('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado');
-
 		$postdata = file_get_contents("php://input");
 		$request = json_decode($postdata);
 
